@@ -3,8 +3,8 @@ const { SlashCommandBuilder } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("start")
-    .setDescription("Starts contract monitor (if the node is set)"),
+    .setDescription("Subscribe to the contract monitor."),
   async execute(interaction) {
-    await interaction.reply("Starting contract monitor!");
+    await interaction.reply("Listening to contract monitor!");
   },
 };

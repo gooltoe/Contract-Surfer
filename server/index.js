@@ -15,7 +15,7 @@ async function startServer() {
 
   io.on("connection", (socket) => {
     // currently drilling socket all the way down (change this later)
-    socket.emit("Hello", "World");
+    socket.emit("Connect", "Connected");
     processBlock(socket);
   });
 

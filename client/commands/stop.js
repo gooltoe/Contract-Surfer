@@ -3,8 +3,8 @@ const { SlashCommandBuilder } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("stop")
-    .setDescription("Stops the contract monitor."),
+    .setDescription("Unsubscriber to the contract monitor."),
   async execute(interaction) {
-    await interaction.reply("Stopping monitor!");
+    await interaction.reply("Not listening to the contract monitor!");
   },
 };

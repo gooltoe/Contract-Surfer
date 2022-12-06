@@ -4,11 +4,12 @@ const makeEmbed = (contractJSON) => {
   const embed = new EmbedBuilder()
     .setColor("#00FFFF")
     .setAuthor({
-      name: "Contract Surfer",
+      name: "Contract Surfer 🏄‍♂️",
       url: "https://discord.js.org",
     })
-    .setDescription("New contract found")
-    .setTimestamp()
+    .setTitle(
+      `New Contract: ${contractJSON["Contract Name"]} (${contractJSON["Contract Symbol"]})`
+    )
     .addFields(
       {
         name: "Contract Name:",
@@ -23,28 +24,34 @@ const makeEmbed = (contractJSON) => {
     )
     .addFields(
       {
-        name: "Block: ",
-        value: `${contractJSON["Block"]}`,
-      },
-      {
         name: "Contract Address: ",
-        value: contractJSON["Contract Address"],
-        url: "https://etherscan.io/address/" + contractJSON["Contract Address"],
-        inline: true,
+        value: `[${contractJSON["Contract Address"]}](https://etherscan.io/address/${contractJSON["Contract Address"]})`,
+        inline: false,
       },
       {
         name: "Contract Creator:",
-        value: contractJSON["Contract Creator"],
-        url: "https://etherscan.io/address/" + contractJSON["Contract Creator"],
+        value: `[${contractJSON["Contract Creator"]}](https://etherscan.io/address/${contractJSON["Contract Creator"]})`,
         inline: true,
       },
       {
         name: "Transaction Hash: ",
-        value: contractJSON["Transaction Hash"],
-        url: "https://etherscan.io/tx/" + contractJSON["Transaction Hash"],
+        value: `[${contractJSON["Transaction Hash"]}](https://etherscan.io/tx/${contractJSON["Transaction Hash"]})`,
         inline: false,
+      },
+      {
+        name: "Block: ",
+        value: `[${contractJSON["Block"]}](https://etherscan.io/block/${contractJSON["Block"]})`,
       }
-    );
+    )
+    .addFields({
+      name: "\u200B",
+      value:
+        "Consider making a [donation](https://discord.js.org) to keep this bot alive!",
+    })
+    .setFooter({
+      text: "Contract Surfer",
+    })
+    .setTimestamp();
   return embed;
 };
 
