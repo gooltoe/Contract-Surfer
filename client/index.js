@@ -7,7 +7,7 @@ const {
   GatewayIntentBits,
   channelLink,
 } = require("discord.js");
-const { token, serverURL } = require("./config.json");
+const { token, serverURL } = require("../config.json");
 const { io } = require("socket.io-client");
 const { makeEmbed } = require("./embed");
 
