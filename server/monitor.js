@@ -1,5 +1,5 @@
 // Written by gooltoe for the world
-import globalEmitter from "./eventEmitter";
+const { emitter } = require("./eventEmitter");
 
 const { ethers } = require("ethers");
 const ERC721 = require("@openzeppelin/contracts/build/contracts/ERC721.json");
@@ -32,7 +32,7 @@ const processContract = async (transaction) => {
       Time: Date.now(),
     };
 
-    globalEmitter.emit("send_info", { contractJSON: contractJSON });
+    emitter.emit("send_info", { contractJSON: contractJSON });
   } catch (e) {
     console.log(e);
   }

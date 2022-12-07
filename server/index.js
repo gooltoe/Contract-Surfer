@@ -1,15 +1,15 @@
-const { globalEmitter } = require("./eventEmitter");
+const { emitter } = require("./eventEmitter");
 const { processBlock } = require("./monitor");
 const { Server } = require("socket.io");
 const port = process.env.PORT || 3000;
-
+console.log("hello");
 processBlock();
 
 const io = new Server(port, { path: "/" });
 
 io.on("connection", (socket) => {
   socket.emit("Connect", "Connected");
-  globalEmitter.on("send_info", ({ contractJSON }) => {
+  emitter.on("send_info", ({ contractJSON }) => {
     socket.emit("Connect", contractJSON);
   });
 });
