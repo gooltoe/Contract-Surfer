@@ -1,5 +1,5 @@
 // Written by gooltoe for the world
-import globalEmitter from "./loaders/eventEmitter";
+import globalEmitter from "./eventEmitter";
 
 const { ethers } = require("ethers");
 const ERC721 = require("@openzeppelin/contracts/build/contracts/ERC721.json");
@@ -8,7 +8,7 @@ const RPC_ENDPOINT =
   "https://nd-223-235-549.p2pify.com/d334e467db68c2dc91d416d74f1a36c1";
 const provider = new ethers.providers.JsonRpcProvider(RPC_ENDPOINT);
 
-const processContract = async (transaction, socket) => {
+const processContract = async (transaction) => {
   try {
     console.log(`new contract found ${transaction.creates}`);
 
@@ -33,42 +33,30 @@ const processContract = async (transaction, socket) => {
       Time: Date.now(),
     };
 
-    globalEmitter.emit("send_info", {
-      socket: socket,
-      contractJSON: contractJSON,
-    });
+    globalEmitter.emit("send_info", { contractJSON: contractJSON });
   } catch (e) {
     console.log(e);
   }
 };
 
-const processTransaction = (transactions, socket) => {
+const processTransaction = (transactions) => {
   // Go through each transaction and filter out what you need!
   transactions.forEach((transaction) => {
     if (transaction && transaction.creates) {
-      processContract(transaction, socket);
+      processContract(transaction);
     }
   });
 };
 
-const processBlock = async (socket) => {
+const processBlock = async () => {
   // Fire once per new block!
   provider.on("block", async (blockNumber) => {
     console.log(`new block: ${blockNumber}`);
 
     const blockInfo = await provider.getBlockWithTransactions(blockNumber);
     const transactions = blockInfo.transactions;
-    processTransaction(transactions, socket);
+    processTransaction(transactions);
   });
 };
 
-const testing = async (io) => {
-  io.sockets.emit("send_info");
-  // globalEmitter.emit("send_info", {
-  //   time: Date.now(),
-  //   contractJSON: "A message",
-  // });
-};
-
 exports.processBlock = processBlock;
-exports.testing = testing;

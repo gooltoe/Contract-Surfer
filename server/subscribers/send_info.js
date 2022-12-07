@@ -4,8 +4,8 @@
  * @returns {Function} Subscriber
  */
 export default function sendInfo() {
-  return ({ socket, contractJSON }) => {
-    // return contractJSON;
-    socket.emit("send_to_client", contractJSON);
+  return ({ contractJSON }) => {
+    // trigger a socket.io event to send to client
+    console.log(contractJSON);
   };
 }

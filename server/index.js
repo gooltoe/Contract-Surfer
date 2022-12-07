@@ -1,39 +1,46 @@
-import loaders from "./loaders";
+import globalEmitter from "./eventEmitter";
 
-const express = require("express");
-const { createServer } = require("http");
+const { processBlock } = require("./monitor");
 const { Server } = require("socket.io");
-const { processBlock, testing } = require("./monitor");
+const port = process.env.PORT || 3000;
 
-const port = 3000;
+processBlock();
 
-async function startServer() {
-  const app = express();
-  await loaders({ app });
-  const httpServer = createServer(app);
-  const io = new Server(httpServer, { path: "/" });
+const io = new Server(port, { path: "/" });
 
-  io.on("connection", (socket) => {
-    // currently drilling socket all the way down (change this later)
-    socket.emit("Connect", "Connected");
-    processBlock(socket);
+io.on("connection", (socket) => {
+  socket.emit("Connect", "Connected");
+  globalEmitter.on("send_info", ({ contractJSON }) => {
+    socket.emit("Connect", contractJSON);
   });
+});
 
-  app.use(express.json());
+// io.listen(port);
 
-  app.get("/alive", (req, res, next) => {
-    res.send("OK");
-    next();
-  });
+// async function startServer() {
+//   const app = express();
+//   const httpServer = createServer(app);
+//   const io = new Server(httpServer, { path: "/" });
 
-  app.use((req, res, next) => {
-    console.log(`${req.method} ${req.url} ${res.statusCode}`);
-    next();
-  });
+//   // emits send_info event when new contract is found
 
-  httpServer.listen(port, () => {
-    console.log("Started");
-  });
-}
+//   io.on("connection", (socket) => {
+//     socket.emit("Connect", "Connected");
+//     globalEmitter.on("send_info", ({ contractJSON }) => {
+//       socket.emit("Connect", contractJSON);
+//     });
+//   });
 
-startServer();
+//   app.use(express.json());
+
+//   app.use((req, res, next) => {
+//     console.log(`${req.method} ${req.url} ${res.statusCode}`);
+//     next();
+//   });
+
+//   httpServer.listen(port, () => {
+//     console.log("Started");
+//   });
+// }
+
+// startServer();
