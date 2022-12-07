@@ -4,8 +4,7 @@ import globalEmitter from "./eventEmitter";
 const { ethers } = require("ethers");
 const ERC721 = require("@openzeppelin/contracts/build/contracts/ERC721.json");
 
-const RPC_ENDPOINT =
-  "https://nd-223-235-549.p2pify.com/d334e467db68c2dc91d416d74f1a36c1";
+const RPC_ENDPOINT = process.env.RPC;
 const provider = new ethers.providers.JsonRpcProvider(RPC_ENDPOINT);
 
 const processContract = async (transaction) => {
