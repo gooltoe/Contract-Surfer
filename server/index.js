@@ -1,5 +1,4 @@
-import globalEmitter from "./eventEmitter";
-
+const { globalEmitter } = require("./eventEmitter");
 const { processBlock } = require("./monitor");
 const { Server } = require("socket.io");
 const port = process.env.PORT || 3000;
