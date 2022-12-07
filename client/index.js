@@ -7,12 +7,12 @@ const {
   GatewayIntentBits,
   channelLink,
 } = require("discord.js");
-const { token } = require("./config.json");
+const { token, serverURL } = require("./config.json");
 const { io } = require("socket.io-client");
 const { makeEmbed } = require("./embed");
 
 // const socket = io("ws://localhost:3000", { path: "" });
-const socket = io("https://contract-surfer-lrp.onrender.com", { path: "" });
+const socket = io(serverURL, { path: "" });
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
