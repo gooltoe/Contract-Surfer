@@ -29,7 +29,7 @@ async function startServer() {
   io.on("connection", (socket) => {
     socket.emit("Connect", "Connected");
     emitter.on("send_info", ({ contractJSON }) => {
-      socket.emit("Connect", contractJSON);
+      socket.emit("new_contract", contractJSON);
     });
   });
 

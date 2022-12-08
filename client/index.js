@@ -7,7 +7,7 @@ const {
   GatewayIntentBits,
   channelLink,
 } = require("discord.js");
-const { token, serverURL } = require("../config.json");
+const { token, serverURL } = require("./config.json");
 const { io } = require("socket.io-client");
 const { makeEmbed } = require("./embed");
 
@@ -40,7 +40,7 @@ socket.on("Connect", (param) => {
   console.log(param);
 });
 
-socket.on("send_to_client", (contractJSON) => {
+socket.on("new_contract", (contractJSON) => {
   const embed = makeEmbed(contractJSON);
   console.log(contractJSON);
   client.channels.subscribed.forEach((v, k) => {
@@ -81,6 +81,11 @@ client.on(Events.InteractionCreate, async (interaction) => {
       // };
       // const channel = client.channels.cache.get(channelId);
       // channel.send({ embeds: [makeEmbed(exampleJSON)] }).catch(console.error);
+
+      // client.channels.subscribed.forEach((v, k) => {
+      //   const channel = client.channels.cache.get(k);
+      //   channel.send({ embeds: [makeEmbed(exampleJSON)] }).catch(console.error);
+      // });
     }
     if (command.data.name === "stop") {
       const channelId = interaction.channelId;
