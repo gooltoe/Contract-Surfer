@@ -5,7 +5,7 @@ const makeEmbed = (contractJSON) => {
     .setColor("#00FFFF")
     .setAuthor({
       name: "Contract Surfer 🏄‍♂️",
-      url: "https://discord.js.org",
+      url: "https://contract-surfer-frontend.vercel.app/",
     })
     .setTitle(
       `New Contract: ${contractJSON["Contract Name"]} (${contractJSON["Contract Symbol"]})`
@@ -46,7 +46,7 @@ const makeEmbed = (contractJSON) => {
     .addFields({
       name: "\u200B",
       value:
-        "Consider making a [donation](https://discord.js.org) to keep this bot alive!",
+        "Consider making a [donation](https://contract-surfer-frontend.vercel.app/#Donate) to keep this bot alive!",
     })
     .setFooter({
       text: "Contract Surfer",
