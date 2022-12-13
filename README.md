@@ -16,11 +16,4 @@ https://medium.com/@joerhodev/surfing-the-ethereum-network-️-4120c079d836
 Client directory is the discord bot.
 Server directory is the contract monitor script that is hosted remotely.
 
-client/config.json should look like this:
-{
-  "token": "BOT_TOKEN_ID",
-  "serverURL": "https://contract-surfer-lrp.onrender.com/",
-  "clientId": "BOT_CLIENT_ID",
-  "guildId": "BOT_GUILD_ID"
-}
 
