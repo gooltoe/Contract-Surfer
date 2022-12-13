@@ -15,4 +15,4 @@ https://medium.com/@joerhodev/surfing-the-ethereum-network-️-4120c079d836
 client is the discord bot.
 server is the contract monitor script that is hosted remotely as a web service.
 
-Code is not well documented because I didn't expect people to look at it. But I'll be updating with documentation soon.
+I'll be updating with documentation soon.
