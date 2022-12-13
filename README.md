@@ -16,4 +16,4 @@ https://medium.com/@joerhodev/surfing-the-ethereum-network-️-4120c079d836
 Client directory is the discord bot.
 Server directory is the contract monitor script that is hosted remotely.
 
-
+I didn't expect people to look through my code so I didn't write it very user friendly. Will update with documentation and comments soon.
