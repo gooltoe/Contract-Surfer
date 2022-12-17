@@ -19,7 +19,7 @@ client.once(Events.ClientReady, () => {
 
 client.on("ready", () => {
   // Set the new username for the bot
-  const newUsername = "Contract Surfer";
+  const newUsername = "🏄‍♂️🏄 Contract Surfer 🏄🏄‍♂️";
 
   console.log(client.api);
   // Send a PATCH request to the /users/@me endpoint
