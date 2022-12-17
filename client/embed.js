@@ -5,7 +5,7 @@ const makeEmbed = (contractJSON) => {
     .setColor("#00FFFF")
     .setAuthor({
       name: "Contract Surfer 🏄‍♂️",
-      url: "https://contract-surfer-frontend.vercel.app/",
+      url: "https://www.contractsurfer.xyz/",
     })
     .setTitle(
       `New Contract: ${contractJSON["Contract Name"]} (${contractJSON["Contract Symbol"]})`

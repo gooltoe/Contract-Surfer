@@ -6,6 +6,7 @@ const {
   Events,
   GatewayIntentBits,
   channelLink,
+  PermissionsBitField
 } = require("discord.js");
 const { token, serverURL } = require("./config.json");
 const { io } = require("socket.io-client");
@@ -74,6 +75,13 @@ client.on(Events.InteractionCreate, async (interaction) => {
     if (command.data.name === "start") {
       const guildId = interaction.guildId;
       const channelId = interaction.channelId;
+
+      const permissions = interaction.channel.guild.members.me.permissionsIn(interaction.channel);
+
+      if (!permissions.has(PermissionsBitField.Flags.EmbedLinks)) {
+        throw 'No embed perms'
+      }
+
       client.channels.subscribed.set(channelId, guildId);
     }
     if (command.data.name === "stop") {
@@ -83,11 +91,20 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
     await command.execute(interaction);
   } catch (error) {
-    console.error(error);
-    await interaction.reply({
-      content: "There was an error while executing this command!",
-      ephemeral: true,
-    });
+
+    if (error === "No embed perms") {
+      console.log(`No embed links permission for channel: #${interaction.channel.name} (${interaction.channelId})`);
+      await interaction.reply({
+        content: "Bot must have Embed Links permission in order to display output.",
+        ephemeral: true,
+      });
+    } else {
+      console.error(error);
+      await interaction.reply({
+        content: "There was an error while executing this command!",
+        ephemeral: true,
+      });
+    }
   }
 });
 
